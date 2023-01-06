@@ -8,7 +8,7 @@ import axios from 'axios';
 function App() {
 
   const [quote, setQuote] = useState("");
-
+  
   async function getMotivationalQuote() {
     try {
       const response = await axios.post(
@@ -42,15 +42,19 @@ function App() {
   }
 
   useEffect(() => {
-        getMotivationalQuote()
+    if (quote === "") {
+      return;
+    }  
+    getMotivationalQuote()
   }, []);
+
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          {quote}
+          {quote === "" ? "Generate Quote" : quote}
           <button onClick={getMotivationalQuote}>Generate Quote</button>
         </p>
         <a
