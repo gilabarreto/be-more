@@ -7,6 +7,7 @@ import axios from 'axios';
 function App() {
 
   const [quote, setQuote] = useState("");
+  const [delayedString, setDelayedString] = useState("");
 
   async function getMotivationalQuote() {
     try {
@@ -14,7 +15,7 @@ function App() {
         'https://api.openai.com/v1/completions',
         {
           'model': 'text-davinci-003',
-          'prompt': 'Provide me a random motivational quote.',
+          'prompt': 'Can you please provide me a random motivational quote?',
           'temperature': 1,
           'max_tokens': 1024
         },
@@ -40,21 +41,35 @@ function App() {
     }
   }
 
+  const delayString = async function (string) {
+
+    // await getMotivationalQuote();
+
+    setDelayedString("");
+
+    for (let x = 0; x < string.length; x++) {
+      setTimeout(() => {
+        setDelayedString(prevString => prevString + string[x])
+      }, x * 100)
+    }
+  }
+
   useEffect(() => {
+    getMotivationalQuote();
     if (quote === "") {
       return;
     }
-    getMotivationalQuote()
+    delayString(quote);
   }, []);
 
 
   return (
     <div className="Main">
       <div className='Screen'>
-        <span className='Quote'>{quote === "" ? "Generate Quote" : quote}</span>
+        <span className='Quote'>{delayedString === "" ? "Generate Quote" : delayedString}</span>
       </div>
       <div className='Controls'>
-        <button onClick={getMotivationalQuote}>Generate Quote</button>
+        <button onClick={() => delayString(quote)}>Generate Quote</button>
       </div>
     </div>
   );
