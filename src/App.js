@@ -15,7 +15,7 @@ function App() {
         'https://api.openai.com/v1/completions',
         {
           'model': 'text-davinci-002',
-          'prompt': 'Provide me a random motivational quote. Dont repeat yourself',
+          'prompt': 'Provide me a random motivational quote. Don\'t repeat previous quotes.',
           'temperature': 1,
           'max_tokens': 1024
         },
