@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import { useState, useEffect } from 'react';
@@ -8,7 +7,7 @@ import axios from 'axios';
 function App() {
 
   const [quote, setQuote] = useState("");
-  
+
   async function getMotivationalQuote() {
     try {
       const response = await axios.post(
@@ -44,28 +43,19 @@ function App() {
   useEffect(() => {
     if (quote === "") {
       return;
-    }  
+    }
     getMotivationalQuote()
   }, []);
 
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {quote === "" ? "Generate Quote" : quote}
-          <button onClick={getMotivationalQuote}>Generate Quote</button>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Main">
+      <div className='Screen'>
+        <span className='Quote'>{quote === "" ? "Generate Quote" : quote}</span>
+      </div>
+      <div className='Controls'>
+        <button onClick={getMotivationalQuote}>Generate Quote</button>
+      </div>
     </div>
   );
 }
