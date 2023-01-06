@@ -15,7 +15,7 @@ function App() {
         'https://api.openai.com/v1/completions',
         {
           'model': 'text-davinci-002',
-          'prompt': 'Can you please provide me a random motivational quote?',
+          'prompt': 'Provide me a random motivational quote. Dont repeat yourself',
           'temperature': 1,
           'max_tokens': 1024
         },
@@ -43,8 +43,6 @@ function App() {
 
   const delayString = async function (string) {
 
-    await getMotivationalQuote();
-
     setDelayedString("");
 
     for (let x = 0; x < string.length; x++) {
@@ -55,12 +53,11 @@ function App() {
   }
 
   useEffect(() => {
-    getMotivationalQuote();
     if (quote === "") {
       return;
     }
     delayString(quote);
-  }, []);
+  }, [quote]);
 
 
   return (
@@ -69,7 +66,7 @@ function App() {
         <span className='Quote'>{delayedString === "" ? "Generate Quote" : delayedString}</span>
       </div>
       <div className='Controls'>
-        <button onClick={() => delayString(quote)}>Generate Quote</button>
+        <button onClick={getMotivationalQuote}>Generate Quote</button>
       </div>
     </div>
   );
