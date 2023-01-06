@@ -9,39 +9,40 @@ function App() {
 
   const [quote, setQuote] = useState("");
 
-  useEffect(() => {
-    async function getMotivationalQuote() {
-      try {
-        const response = await axios.post(
-          'https://api.openai.com/v1/completions',
-          {
-            'model': 'text-davinci-003',
-            'prompt': 'Provide me a random motivational quote.',
-            'temperature': 1,
-            'max_tokens': 1024
+  async function getMotivationalQuote() {
+    try {
+      const response = await axios.post(
+        'https://api.openai.com/v1/completions',
+        {
+          'model': 'text-davinci-003',
+          'prompt': 'Provide me a random motivational quote.',
+          'temperature': 1,
+          'max_tokens': 1024
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': process.env.REACT_APP_CHATGTP_KEY
           },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': process.env.REACT_APP_CHATGTP_KEY
-            },
-          },
-          {
-            proxy: {
-              host: 'localhost',
-              port: 3000
-            }
+        },
+        {
+          proxy: {
+            host: 'localhost',
+            port: 3000
           }
-        );
+        }
+      );
 
-        setQuote(response.data.choices[0].text)
-        console.log(response.data.choices[0].text)
+      setQuote(response.data.choices[0].text)
+      console.log(response.data.choices[0].text)
 
-      } catch (err) {
-        console.log(err)
-      }
+    } catch (err) {
+      console.log(err)
     }
-    getMotivationalQuote()
+  }
+
+  useEffect(() => {
+        getMotivationalQuote()
   }, []);
 
   return (
@@ -50,6 +51,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           {quote}
+          <button onClick={getMotivationalQuote}>Generate Quote</button>
         </p>
         <a
           className="App-link"
