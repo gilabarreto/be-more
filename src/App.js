@@ -70,12 +70,34 @@ function App() {
 
 
   return (
-    <div className="Main">
-      <div className='Screen'>
-        <span className='Quote'>{delayedString === "" ? "Generate Quote" : delayedString}</span>
+    <div className="Container">
+      <div className="Main-shadow">
       </div>
-      <div className='Controls'>
-        <button id="Btn-Generator" onClick={handleClick}>Generate Quote</button>
+      <div className="Main">
+        <div className='Screen'>
+          <span className='Quote'>{delayedString === "" ? "Generate Quote" : delayedString}</span>
+        </div>
+        <div className='Controls-Top'>
+          <span id="Rectangle"></span><span id="Circle-Top"></span>
+        </div>
+        <div className='Controls-Middle'>
+          <div className='Controls-Middle-Left'>
+            <span id="Plus-Sign">+</span>
+            {/* <button id="Btn-Generator" onClick={handleClick}>Generate Quote</button> */}
+          </div>
+          <div className='Controls-Middle-Right'>
+            <span id="Triangle">▲</span><span id="Circle-Middle"></span>
+          </div>
+        </div>
+        <div className='Controls-Bottom'>
+          <div className='Controls-Bottom-Left'>
+            <button id="Btn-Twitter">Twitter</button>
+            <button id="Btn-Facebook">Facebook</button>
+          </div>
+          <div className='Controls-Bottom-Right'>
+            <span id="Circle-Bottom"></span>
+          </div>
+        </div>
       </div>
     </div>
   );
