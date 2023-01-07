@@ -253,7 +253,7 @@ body {
   color: aliceblue;
 }
 
-#Circle-Bottom {
+.Circle-Bottom {
   width: 4em;
   height: 4em;
   background: #ed005a;
@@ -261,4 +261,5 @@ body {
   border-color: #000002;
   border-style: solid;
   border-width: 0.3em;
+  cursor: pointer;
 }

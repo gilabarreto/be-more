@@ -95,7 +95,7 @@ function App() {
             <button id="Btn-Facebook">Facebook</button>
           </div>
           <div className='Controls-Bottom-Right'>
-            <span id="Circle-Bottom"></span>
+            <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => setDelayedString("")} title="Clear Console"></span>
           </div>
         </div>
       </div>
