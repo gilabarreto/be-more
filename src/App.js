@@ -41,6 +41,13 @@ function App() {
     }
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    const UserRequest = event.target.UserRequest.value;
+    fetchData(UserRequest);
+    event.target.UserRequest.value = '';
+  }
+
   const handleClick = function () {
 
     fetchData("Provide me a random motivational quote. Don\'t repeat previous answers.")
@@ -75,10 +82,18 @@ function App() {
       </div>
       <div className="Main">
         <div className='Screen'>
-          <span className='Quote'>{delayedString === "" ? "Generate Quote" : delayedString}</span>
+          <span className='Quote'>{delayedString === "" ? <>
+            <p>Hi, I'm Be-More!</p>
+            <p>I'm here to help you be a better you.</p>
+            <p>Click the top button for more instructions. :-)</p>
+          </>
+            : delayedString}</span>
         </div>
         <div className='Controls-Top'>
-          <span id="Rectangle"></span><span id="Circle-Top"></span>
+          <form onSubmit={handleSubmit}>
+            <input type="text" id="UserRequest" className="Rectangle" name="UserRequest" />
+          </form>
+          <span id="Circle-Top"></span>
         </div>
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
@@ -91,8 +106,8 @@ function App() {
         </div>
         <div className='Controls-Bottom'>
           <div className='Controls-Bottom-Left'>
-            <button id="Btn-Twitter">Twitter</button>
-            <button id="Btn-Facebook">Facebook</button>
+            <button className="Btn-Twitter">Twitter</button>
+            <button className="Btn-Facebook">Facebook</button>
           </div>
           <div className='Controls-Bottom-Right'>
             <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => setDelayedString("")} title="Clear Console"></span>
