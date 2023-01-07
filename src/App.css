@@ -215,11 +215,12 @@ body {
 #Triangle {
   font-size: 4em;
   color: #01ccdd;
+  cursor: pointer;
   -webkit-text-stroke-width: 0.08em;
   -webkit-text-stroke-color: #000002;
 }
 
-#Circle-Middle {
+.Circle-Middle {
   width: 3em;
   height: 3em;
   background: #00e830;
@@ -227,6 +228,7 @@ body {
   border-color: #000002;
   border-style: solid;
   border-width: 0.3em;
+  cursor: pointer;
 }
 
 #Btn-Twitter {

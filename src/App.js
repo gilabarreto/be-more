@@ -86,7 +86,7 @@ function App() {
             {/* <button id="Btn-Generator" onClick={handleClick}>Generate Quote</button> */}
           </div>
           <div className='Controls-Middle-Right'>
-            <span id="Triangle">▲</span><span id="Circle-Middle"></span>
+            <span id="Triangle">▲</span><span id="Btn-Generator" className="Circle-Middle" onClick={handleClick} title="Generate a Motivational Quote"></span>
           </div>
         </div>
         <div className='Controls-Bottom'>
