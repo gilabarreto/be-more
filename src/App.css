@@ -217,7 +217,7 @@ body {
    -webkit-transform: rotate(45deg);
 }
 
-#Triangle {
+.Triangle {
   font-size: 4em;
   color: #01ccdd;
   cursor: pointer;

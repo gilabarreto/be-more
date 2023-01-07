@@ -9,13 +9,13 @@ function App() {
   const [quote, setQuote] = useState("");
   const [delayedString, setDelayedString] = useState("");
 
-  async function getMotivationalQuote() {
+  async function fetchData(request) {
     try {
       const response = await axios.post(
         'https://api.openai.com/v1/completions',
         {
           'model': 'text-davinci-002',
-          'prompt': 'Provide me a random motivational quote. Don\'t repeat previous quotes.',
+          'prompt': request,
           'temperature': 1,
           'max_tokens': 1024
         },
@@ -43,8 +43,8 @@ function App() {
 
   const handleClick = function () {
 
-    getMotivationalQuote()
-    document.getElementById("Btn-Generator").disabled = true;
+    fetchData("Provide me a random motivational quote. Don\'t repeat previous answers.")
+    document.getElementById("Btn-Quote").disabled = true;
   }
 
   const delayString = function (string) {
@@ -57,7 +57,7 @@ function App() {
       }, x * 100)
     }
     setTimeout(() => {
-      document.getElementById("Btn-Generator").disabled = false;
+      document.getElementById("Btn-Quote").disabled = false;
     }, string.length * 100);
   }
 
@@ -83,10 +83,10 @@ function App() {
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
             <span className="Plus-Sign">+</span>
-            {/* <button id="Btn-Generator" onClick={handleClick}>Generate Quote</button> */}
           </div>
           <div className='Controls-Middle-Right'>
-            <span id="Triangle">▲</span><span id="Btn-Generator" className="Circle-Middle" onClick={handleClick} title="Generate a Motivational Quote"></span>
+            <span id="Btn-Random" className="Triangle" onClick={() => fetchData("Give me a random advice to cheer my day. Don\'t repeat previous answers.")} title="Generate a Good Advice">▲</span>
+            <span id="Btn-Quote" className="Circle-Middle" onClick={handleClick} title="Generate a Motivational Quote"></span>
           </div>
         </div>
         <div className='Controls-Bottom'>
