@@ -41,15 +41,24 @@ function App() {
     }
   }
 
-  const delayString = async function (string) {
+  const handleClick = function () {
+
+    getMotivationalQuote()
+    document.getElementById("Btn-Generator").disabled = true;
+  }
+
+  const delayString = function (string) {
 
     setDelayedString("");
 
     for (let x = 0; x < string.length; x++) {
       setTimeout(() => {
-        setDelayedString(prevString => prevString + string[x])
+        setDelayedString(prevString => prevString + string[x]);
       }, x * 100)
     }
+    setTimeout(() => {
+      document.getElementById("Btn-Generator").disabled = false;
+    }, string.length * 100);
   }
 
   useEffect(() => {
@@ -66,7 +75,7 @@ function App() {
         <span className='Quote'>{delayedString === "" ? "Generate Quote" : delayedString}</span>
       </div>
       <div className='Controls'>
-        <button onClick={getMotivationalQuote}>Generate Quote</button>
+        <button id="Btn-Generator" onClick={handleClick}>Generate Quote</button>
       </div>
     </div>
   );
