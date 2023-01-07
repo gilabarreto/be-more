@@ -134,7 +134,7 @@ body {
   color: #555;
   display: flex;
   align-items: center;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   overflow: hidden;
 }
 
@@ -204,12 +204,17 @@ body {
   border-width: 0.3em;
 }
 
-#Plus-Sign {
+.Plus-Sign {
   font-size: 10em;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: #ebc929;
+  cursor: pointer;
   -webkit-text-stroke-width: 0.01em;
   -webkit-text-stroke-color: #000002;
+}
+
+.Plus-Sign:active {
+   -webkit-transform: rotate(45deg);
 }
 
 #Triangle {

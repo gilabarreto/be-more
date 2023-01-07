@@ -82,7 +82,7 @@ function App() {
         </div>
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
-            <span id="Plus-Sign">+</span>
+            <span className="Plus-Sign">+</span>
             {/* <button id="Btn-Generator" onClick={handleClick}>Generate Quote</button> */}
           </div>
           <div className='Controls-Middle-Right'>
