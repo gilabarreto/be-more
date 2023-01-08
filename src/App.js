@@ -6,7 +6,8 @@ import axios from 'axios';
 
 function App() {
 
-  const [quote, setQuote] = useState("");
+  const [screenMsg, setScreenMsg] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const [delayedString, setDelayedString] = useState("");
 
   async function fetchData(request) {
@@ -33,7 +34,7 @@ function App() {
         }
       );
 
-      setQuote(response.data.choices[0].text)
+      setScreenMsg(response.data.choices[0].text)
       console.log(response.data.choices[0].text)
 
     } catch (err) {
@@ -41,20 +42,37 @@ function App() {
     }
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const UserRequest = event.target.UserRequest.value;
     fetchData(UserRequest);
     event.target.UserRequest.value = '';
   }
 
-  const handleClick = function () {
+  const welcome = "Hi, I'm Be-More!\nI'm here to help you be a better you.\nClick the top right button for more instructions."
+  const adviceResquest = "Give me a random advice to cheer my day. Don\'t repeat previous answers."
+  const quoteResquest = "Provide me a random quote. Don\'t repeat previous answers."
+  
+  const clearConsole = () => { return (<>Clean and Clear. What's next? :-)</>) }
 
-    fetchData("Provide me a random motivational quote. Don\'t repeat previous answers.")
-    document.getElementById("Btn-Quote").disabled = true;
+  const instructions = () => {
+    return (<>
+      <p>Instructions:</p>
+      <p></p>
+      <p>Click the ▲ button for a Advice</p>
+      <p>Click the ⬤ green button for Quotes</p>
+      <p>Or Make a Trivial Question on ▬ bar</p>
+      <p>Hit the red button to clear the console</p>
+    </>)
   }
 
-  const delayString = function (string) {
+  const handleClick = (request) => {
+
+    fetchData(request)
+    setIsDisabled(true)
+  }
+
+  const delayString = (string) => {
 
     setDelayedString("");
 
@@ -63,18 +81,23 @@ function App() {
         setDelayedString(prevString => prevString + string[x]);
       }, x * 100)
     }
-    setTimeout(() => {
-      document.getElementById("Btn-Quote").disabled = false;
-    }, string.length * 100);
+    setTimeout(() => { setIsDisabled(false) }, string.length * 100);
   }
 
   useEffect(() => {
-    if (quote === "") {
+    setIsDisabled(true)
+    setScreenMsg(welcome)
+    if (screenMsg === welcome) {
+      delayString(welcome)
+    }
+  }, []);
+
+  useEffect(() => {
+    if (screenMsg === "") {
       return;
     }
-    delayString(quote);
-  }, [quote]);
-
+    delayString(screenMsg);
+  }, [screenMsg]);
 
   return (
     <div className="Container">
@@ -82,35 +105,31 @@ function App() {
       </div>
       <div className="Main">
         <div className='Screen'>
-          <span className='Quote'>{delayedString === "" ? <>
-            <p>Hi, I'm Be-More!</p>
-            <p>I'm here to help you be a better you.</p>
-            <p>Click the top button for more instructions. :-)</p>
-          </>
-            : delayedString}</span>
+          <span className='ScreenMsg'>{delayedString === "" ? screenMsg : delayedString}</span>
         </div>
         <div className='Controls-Top'>
           <form onSubmit={handleSubmit}>
             <input type="text" id="UserRequest" className="Rectangle" name="UserRequest" />
           </form>
-          <span id="Circle-Top"></span>
+          <span id="Instructions" className="Circle-Top" onClick={() => { if (isDisabled) return; setScreenMsg(instructions) }} title="Click for More Instructions"></span>
         </div>
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
             <span className="Plus-Sign">+</span>
           </div>
           <div className='Controls-Middle-Right'>
-            <span id="Btn-Random" className="Triangle" onClick={() => fetchData("Give me a random advice to cheer my day. Don\'t repeat previous answers.")} title="Generate a Good Advice">▲</span>
-            <span id="Btn-Quote" className="Circle-Middle" onClick={handleClick} title="Generate a Motivational Quote"></span>
+            <span id="Btn-Random" className="Triangle" onClick={() => { if (isDisabled) return; handleClick(adviceResquest) }} title="Generate a Good Advice">▲</span>
+            <span id="Btn-Quote" className="Circle-Middle" onClick={() => { if (isDisabled) return; handleClick(quoteResquest) }} title="Generate a Motivational Quote"></span>
           </div>
         </div>
         <div className='Controls-Bottom'>
           <div className='Controls-Bottom-Left'>
-            <button className="Btn-Twitter">Twitter</button>
-            <button className="Btn-Facebook">Facebook</button>
+            {/* {screenMsg === welcome || screenMsg === clearConsole ? <button className='Btn-Twitter'>Twitter</button> : */}
+            <a href={`https://twitter.com/intent/tweet?text=${screenMsg}+Be-More+App`} className="Btn-Twitter" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href={`https://wa.me/?text=${screenMsg}+Be-More+App`} className="Btn-Facebook" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           </div>
           <div className='Controls-Bottom-Right'>
-            <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => setDelayedString("")} title="Clear Console"></span>
+            <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => { if (isDisabled) return; setScreenMsg(clearConsole) }} title="Clear Console"></span>
           </div>
         </div>
       </div>
