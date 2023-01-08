@@ -42,19 +42,14 @@ function App() {
     }
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const UserRequest = event.target.UserRequest.value;
-    fetchData(UserRequest);
-    event.target.UserRequest.value = '';
-  }
-
-  const welcome = "Hi, I'm Be-More!\nI'm here to help you be a better you.\nClick the top right button for more instructions."
-  const adviceResquest = "Give me a random advice to cheer my day. Don\'t repeat previous answers."
-  const quoteResquest = "Provide me a random quote. Don\'t repeat previous answers."
+  
+  const welcome = "Hi, I'm Be-More! I'm here to help you be a better you. Click the top right button for more instructions."
+  const adviceResquest = "Give me a random advice to cheer my day. Don't repeat previous answers."
+  const quoteResquest = "Provide me a random quote. Don't repeat previous answers."
+  const socialMsg = encodeURIComponent("Hey! Did you hear about this cool AI App called Be-More? Check it out!")
   
   const clearConsole = () => { return (<>Clean and Clear. What's next? :-)</>) }
-
+  
   const instructions = () => {
     return (<>
       <p>Instructions:</p>
@@ -65,7 +60,14 @@ function App() {
       <p>Hit the red button to clear the console</p>
     </>)
   }
-
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const UserRequest = event.target.UserRequest.value;
+    fetchData(UserRequest);
+    event.target.UserRequest.value = '';
+  }
+  
   const handleClick = (request) => {
 
     fetchData(request)
@@ -124,9 +126,8 @@ function App() {
         </div>
         <div className='Controls-Bottom'>
           <div className='Controls-Bottom-Left'>
-            {/* {screenMsg === welcome || screenMsg === clearConsole ? <button className='Btn-Twitter'>Twitter</button> : */}
-            <a href={`https://twitter.com/intent/tweet?text=${screenMsg}+Be-More+App`} className="Btn-Twitter" target="_blank" rel="noopener noreferrer">Twitter</a>
-            <a href={`https://wa.me/?text=${screenMsg}+Be-More+App`} className="Btn-Facebook" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href={`https://twitter.com/intent/tweet?text=${socialMsg}&url=https://gilabarreto.github.io/be-more/`} className="Btn-Twitter" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href={`https://wa.me/?text=${socialMsg}+https://gilabarreto.github.io/be-more/`} className="Btn-WhatsApp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           </div>
           <div className='Controls-Bottom-Right'>
             <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => { if (isDisabled) return; setScreenMsg(clearConsole) }} title="Clear Console"></span>
