@@ -13,7 +13,7 @@ function App() {
   async function fetchData(request) {
     // console.log(request)
     try {
-      const response = await axios.post('http://localhost:5000/chat',
+      const response = await axios.post('https://be-more-server.onrender.com/chat',
         { data: request }
       );
 
