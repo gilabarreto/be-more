@@ -77,7 +77,7 @@ function App() {
   }, [screenMsg]);
 
   return (
-    <div className="Container">
+    <>
       <div className="Main-shadow">
       </div>
       <div className="Main">
@@ -109,7 +109,7 @@ function App() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
