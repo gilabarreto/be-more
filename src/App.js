@@ -11,45 +11,27 @@ function App() {
   const [delayedString, setDelayedString] = useState("");
 
   async function fetchData(request) {
+    // console.log(request)
     try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/completions',
-        {
-          'model': 'text-davinci-002',
-          'prompt': request,
-          'temperature': 1,
-          'max_tokens': 1024
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': process.env.REACT_APP_CHATGTP_KEY
-          },
-        },
-        {
-          proxy: {
-            host: 'localhost',
-            port: 3000
-          }
-        }
+      const response = await axios.post('http://localhost:5000/chat',
+        { data: request }
       );
 
-      setScreenMsg(response.data.choices[0].text)
-      console.log(response.data.choices[0].text)
+      setScreenMsg(response.data)
+      console.log(response.data)
 
     } catch (err) {
       console.log(err)
     }
   }
 
-  
   const welcome = "Hi, I'm Be-More! I'm here to help you be a better you. Click the top right button for more instructions."
   const adviceResquest = "Give me a random advice to cheer my day. Don't repeat previous answers."
   const quoteResquest = "Provide me a random quote. Don't repeat previous answers."
   const socialMsg = encodeURIComponent("Hey! Did you hear about this cool AI App called Be-More? Check it out!")
-  
+
   const clearConsole = () => { return (<>Clean and Clear. What's next? :-)</>) }
-  
+
   const instructions = () => {
     return (<>
       <p>Instructions:</p>
@@ -60,14 +42,14 @@ function App() {
       <p>Hit the red button to clear the console</p>
     </>)
   }
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const UserRequest = event.target.UserRequest.value;
     fetchData(UserRequest);
     event.target.UserRequest.value = '';
   }
-  
+
   const handleClick = (request) => {
 
     fetchData(request)
