@@ -69,16 +69,9 @@ function App() {
   }
 
   useEffect(() => {
-    setIsDisabled(true)
-    setScreenMsg(welcome)
-    if (screenMsg === welcome) {
-      delayString(welcome)
-    }
-  }, []);
-
-  useEffect(() => {
     if (screenMsg === "") {
-      return;
+      setIsDisabled(true)
+      setScreenMsg(welcome)
     }
     delayString(screenMsg);
   }, [screenMsg]);
