@@ -9,14 +9,15 @@
 
 /* Mobile styles */
 
-@media only screen and (max-width: 769px) {
+@media only screen and (max-width: 602px) {
 
   body {
     background-color: #63c5ae;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
     flex-direction: column;
     align-content: center;
+    /* align-items: center; */
     justify-content: center;
     color: #333;
   }
@@ -206,7 +207,7 @@
 
 /* Tablet and Desktop styles */
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 603px) {
 
   body {
     background-color: #63c5ae;
