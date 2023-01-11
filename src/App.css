@@ -26,7 +26,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 3em;
-    margin: 2em;
+    margin: 2em 2em 2em 2em;
     height: 609px;
     aspect-ratio: .9 / 1;
     transition: all 300ms;
