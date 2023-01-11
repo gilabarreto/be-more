@@ -10,7 +10,6 @@ function App() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [delayedString, setDelayedString] = useState("");
 
-
   // Async Function to Make Axios Post Request
   async function fetchData(request) {
     try {
