@@ -10,8 +10,9 @@ function App() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [delayedString, setDelayedString] = useState("");
 
+
+  // Async Function to Make Axios Post Request
   async function fetchData(request) {
-    // console.log(request)
     try {
       const response = await axios.post('https://be-more-server.onrender.com/chat',
         { data: request }
@@ -25,6 +26,7 @@ function App() {
     }
   }
 
+  // Messages
   const welcome = "Hi, I'm Be-More! I'm here to help you be a better you. Click the top right button for more instructions."
   const adviceResquest = "Give me a random advice to cheer my day. Don't repeat previous answers."
   const quoteResquest = "Provide me a random quote. Don't repeat previous answers."
@@ -43,6 +45,7 @@ function App() {
     </>)
   }
 
+  // Function to Handle Input Submit
   const handleSubmit = (event) => {
     event.preventDefault();
     const UserRequest = event.target.UserRequest.value;
@@ -50,12 +53,14 @@ function App() {
     event.target.UserRequest.value = '';
   }
 
+  // Function to Handle Button Clicks
   const handleClick = (request) => {
 
     fetchData(request)
     setIsDisabled(true)
   }
 
+  // Function to Print Message as Typewriter
   const delayString = (string) => {
 
     setDelayedString("");
