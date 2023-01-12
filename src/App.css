@@ -179,7 +179,7 @@
     text-decoration: none;
   }
 
-  a.Btn-WhatsApp {
+  .Instructions {
     display: flex;
     justify-content: center;
     width: 5.9em;
@@ -191,6 +191,7 @@
     color: aliceblue;
     font-size: 0.8em;
     text-decoration: none;
+    cursor: pointer;
   }
 
   .Circle-Bottom {
@@ -397,7 +398,7 @@
     text-decoration: none;
   }
 
-  a.Btn-WhatsApp {
+  .Instructions {
     display: flex;
     justify-content: center;
     width: 5.9em;
@@ -409,6 +410,7 @@
     color: aliceblue;
     font-size: 0.8em;
     text-decoration: none;
+    cursor: pointer;
   }
 
   .Circle-Bottom {

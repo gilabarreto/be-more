@@ -1,10 +1,12 @@
 import './App.css';
 
 import { useState, useEffect } from 'react';
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 import axios from 'axios';
 
 function App() {
+
 
   const [screenMsg, setScreenMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -12,6 +14,8 @@ function App() {
 
   // Async Function to Make Axios Post Request
   async function fetchData(request) {
+
+
     try {
       const response = await axios.post('https://be-more-server.onrender.com/chat',
         { data: request }
@@ -25,12 +29,12 @@ function App() {
   }
 
   // Messages
-  const welcome = "Hi, I'm Be-More! I'm here to help you be a better you. Click the top right button for more instructions."
+  const welcome = "Hi, I'm Be-More! I'm here to help you be a better you. Click the Info button for more instructions."
   const adviceResquest = "Give me a random advice to cheer my day. Don't repeat previous answers."
   const quoteResquest = "Provide me a random quote. Don't repeat previous answers."
   const socialMsg = encodeURIComponent("Hey! Did you hear about this cool AI App called Be-More? Check it out!")
 
-  const clearConsole = () => { return (<>Clean and Clear. What's next? :-)</>) }
+  const clearConsole = "Clean and Clear. What's next? :-)"
 
   const instructions = () => {
     return (<>
@@ -43,6 +47,8 @@ function App() {
     </>)
   }
 
+  const { speak } = useSpeechSynthesis();
+
   // Function to Handle Input Submit
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,6 +59,8 @@ function App() {
 
   // Function to Handle Button Clicks
   const handleClick = (request) => {
+
+    setDelayedString("loading");
 
     fetchData(request)
     setIsDisabled(true)
@@ -85,13 +93,13 @@ function App() {
       </div>
       <div className="Main">
         <div className='Screen'>
-          <span className='ScreenMsg'>{delayedString === "" ? screenMsg : delayedString}</span>
+          <span className='ScreenMsg'>{delayedString === "loading" ? "Loading..." : delayedString}</span>
         </div>
         <div className='Controls-Top'>
           <form onSubmit={handleSubmit}>
             <input type="text" id="UserRequest" className="Rectangle" name="UserRequest" />
           </form>
-          <span id="Instructions" className="Circle-Top" onClick={() => { if (isDisabled) return; setScreenMsg(instructions) }} title="Click for More Instructions"></span>
+          <span id="Voice" className="Circle-Top" onClick={() => { if (isDisabled) return; speak({ text: screenMsg }) }} title="Click for More Instructions"></span>
         </div>
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
@@ -105,10 +113,10 @@ function App() {
         <div className='Controls-Bottom'>
           <div className='Controls-Bottom-Left'>
             <a href={`https://twitter.com/intent/tweet?text=${socialMsg}&url=https://gilabarreto.github.io/be-more/`} className="Btn-Twitter" target="_blank" rel="noopener noreferrer">Twitter</a>
-            <a href={`https://wa.me/?text=${socialMsg}+https://gilabarreto.github.io/be-more/`} className="Btn-WhatsApp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <span id="Btn-Instructions" className="Instructions" onClick={() => { if (isDisabled) return; setDelayedString(instructions) }} title="Click for More Instructions">Info</span>
           </div>
           <div className='Controls-Bottom-Right'>
-            <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => { if (isDisabled) return; setScreenMsg(clearConsole) }} title="Clear Console"></span>
+            <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => { if (isDisabled) return; setDelayedString(clearConsole) }} title="Clear Console"></span>
           </div>
         </div>
       </div>
