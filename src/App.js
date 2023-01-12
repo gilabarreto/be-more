@@ -7,10 +7,10 @@ import axios from 'axios';
 
 function App() {
 
-
   const [screenMsg, setScreenMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [delayedString, setDelayedString] = useState("");
+  const [redButton, setRedButton] = useState(false);
 
   // Async Function to Make Axios Post Request
   async function fetchData(request) {
@@ -92,9 +92,10 @@ function App() {
       <div className="Main-shadow">
       </div>
       <div className="Main">
-        <div className='Screen'>
-          <span className='ScreenMsg'>{delayedString === "loading" ? "Loading..." : delayedString}</span>
-        </div>
+        {redButton === true ? <iframe src='https://www.youtube.com/embed/RUaYbfKZIiA' width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" autoplay="1" allowfullscreen /> :
+          <div className='Screen'>
+            <span className='ScreenMsg'>{delayedString === "loading" ? "Loading..." : delayedString}</span>
+          </div>}
         <div className='Controls-Top'>
           <form onSubmit={handleSubmit}>
             <input type="text" id="UserRequest" className="Rectangle" name="UserRequest" />
@@ -116,7 +117,7 @@ function App() {
             <span id="Btn-Instructions" className="Instructions" onClick={() => { if (isDisabled) return; setDelayedString(instructions) }} title="Click for More Instructions">Info</span>
           </div>
           <div className='Controls-Bottom-Right'>
-            <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => { if (isDisabled) return; setDelayedString(clearConsole) }} title="Clear Console"></span>
+            <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => setRedButton(true)} title="Clear Console"></span>
           </div>
         </div>
       </div>
