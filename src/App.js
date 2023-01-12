@@ -5,6 +5,8 @@ import { useSpeechSynthesis } from 'react-speech-kit';
 
 import axios from 'axios';
 
+import YouTube from 'react-youtube';
+
 function App() {
 
   const [screenMsg, setScreenMsg] = useState("");
@@ -14,7 +16,6 @@ function App() {
 
   // Async Function to Make Axios Post Request
   async function fetchData(request) {
-
 
     try {
       const response = await axios.post('https://be-more-server.onrender.com/chat',
@@ -32,8 +33,6 @@ function App() {
   const welcome = "Hi, I'm Be-More! I'm here to help you be a better you. Click the Info button for more instructions."
   const adviceResquest = "Give me a random advice to cheer my day. Don't repeat previous answers."
   const quoteResquest = "Provide me a random quote. Don't repeat previous answers."
-  const socialMsg = encodeURIComponent("Hey! Did you hear about this cool AI App called Be-More? Check it out!")
-
   const clearConsole = "Clean and Clear. What's next? :-)"
 
   const instructions = () => {
@@ -43,10 +42,12 @@ function App() {
       <p>Click the ▲ button for a Advice</p>
       <p>Click the ⬤ green button for Quotes</p>
       <p>Or Make a Trivial Question on ▬ bar</p>
-      <p>Hit the red button to clear the console</p>
+      <p>Click the ⬤ blue button to hear Msg</p>
+      <p>Never click the red button!</p>
     </>)
   }
 
+  // Function text-to-speech
   const { speak } = useSpeechSynthesis();
 
   // Function to Handle Input Submit
@@ -60,15 +61,26 @@ function App() {
   // Function to Handle Button Clicks
   const handleClick = (request) => {
 
+    setRedButton(false)
+    setIsDisabled(true)
     setDelayedString("loading");
 
     fetchData(request)
-    setIsDisabled(true)
+  }
+
+  const handleStaticMsg = (msg) => {
+    if (setRedButton) {
+      setRedButton(false)
+      setDelayedString("loading");
+      setDelayedString(clearConsole)
+    }
+    setDelayedString(msg)
   }
 
   // Function to Print Message as Typewriter
   const delayString = (string) => {
 
+    setIsDisabled(true)
     setDelayedString("");
 
     for (let x = 0; x < string.length; x++) {
@@ -92,7 +104,19 @@ function App() {
       <div className="Main-shadow">
       </div>
       <div className="Main">
-        {redButton === true ? <iframe src='https://www.youtube.com/embed/RUaYbfKZIiA' width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" autoplay="1" allowfullscreen /> :
+        {redButton === true ?
+          <div className='Youtube'>
+            <YouTube
+              videoId='RUaYbfKZIiA'
+              title='Youtube video player'
+              opts={{
+                height: '283px',
+                width: '420px',
+                playerVars: {
+                  autoplay: 1,
+                }
+              }}
+            /></div> :
           <div className='Screen'>
             <span className='ScreenMsg'>{delayedString === "loading" ? "Loading..." : delayedString}</span>
           </div>}
@@ -100,7 +124,7 @@ function App() {
           <form onSubmit={handleSubmit}>
             <input type="text" id="UserRequest" className="Rectangle" name="UserRequest" />
           </form>
-          <span id="Voice" className="Circle-Top" onClick={() => { if (isDisabled) return; speak({ text: screenMsg }) }} title="Click for More Instructions"></span>
+          <span id="Voice" className="Circle-Top" onClick={() => { if (isDisabled) return; speak({ text: screenMsg }) }} title="Click to Hear"></span>
         </div>
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
@@ -113,11 +137,11 @@ function App() {
         </div>
         <div className='Controls-Bottom'>
           <div className='Controls-Bottom-Left'>
-            <a href={`https://twitter.com/intent/tweet?text=${socialMsg}&url=https://gilabarreto.github.io/be-more/`} className="Btn-Twitter" target="_blank" rel="noopener noreferrer">Twitter</a>
-            <span id="Btn-Instructions" className="Instructions" onClick={() => { if (isDisabled) return; setDelayedString(instructions) }} title="Click for More Instructions">Info</span>
+            <span id="Btn-Clear-Console" className="Clear-Console" onClick={() => { if (isDisabled) return; handleStaticMsg(clearConsole) }} title="Clear Console">Clear</span>
+            <span id="Btn-Instructions" className="Instructions" onClick={() => { if (isDisabled) return; handleStaticMsg(instructions) }} title="Click for More Instructions">Info</span>
           </div>
           <div className='Controls-Bottom-Right'>
-            <span id="Btn-Clear-Console" className="Circle-Bottom" onClick={() => setRedButton(true)} title="Clear Console"></span>
+            <span id="Btn-Youtube" className="Circle-Bottom" onClick={() => { if (isDisabled) return; setRedButton(true) }} title="Don Not Press This Button!"></span>
           </div>
         </div>
       </div>
