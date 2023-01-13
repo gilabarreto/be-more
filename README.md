@@ -24,7 +24,7 @@ For full functionality fork and clone be-more-server [here](https://github.com/g
 
 ## Dependencies
 
-- Front-End: React, Axios and OpenAi
+- Front-End: React, Axios, OpenAi, React-Youtube and Web Speech API
 - Back-End: ExpressJS and Axios
 
 ## Enjoy!
