@@ -1,7 +1,6 @@
 import './App.css';
 
 import { useState, useEffect } from 'react';
-import { useSpeechSynthesis } from 'react-speech-kit';
 
 import axios from 'axios';
 
@@ -68,7 +67,7 @@ function App() {
 
   // Function to Handle Button Clicks
   const handleClick = (request) => {
-    
+
     if (isDisabled) {
       return;
     }
@@ -90,16 +89,23 @@ function App() {
     setDelayedString(msg);
   }
 
-  // Function to Handle Static Msgs
-  const handleVoiceOver = () => {
+  // Function to Handle Text-to-speech
+  const handleVoiceOver = (msg) => {
 
     if (isDisabled || redButton === true) {
       return;
     }
+    const handleComplete = () => {
+      setIsDisabled(false);
+    }   
+
     setRedButton(false);
     setIsDisabled(true)
     
-    speak({ text: screenMsg })
+    const utterance = new SpeechSynthesisUtterance(msg);
+    utterance.onend = handleComplete;
+    speechSynthesis.speak(utterance);
+
   }
 
   // Function to Print Message as Typewriter
@@ -119,8 +125,8 @@ function App() {
   useEffect(() => {
     if (screenMsg === "") {
       setScreenMsg(welcome)
-      setIsDisabled(true)
     }
+    setIsDisabled(true)
     delayString(screenMsg);
   }, [screenMsg]);
 
@@ -149,7 +155,7 @@ function App() {
           <form onSubmit={handleSubmit}>
             <input type="text" id="UserRequest" className="Rectangle" name="UserRequest" />
           </form>
-          <span id="Voice" className="Circle-Top" onClick={() => handleVoiceOver() } title="Click to Hear"></span>
+          <span id="Voice" className="Circle-Top" onClick={() => handleVoiceOver(screenMsg)} title="Click to Hear"></span>
         </div>
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
