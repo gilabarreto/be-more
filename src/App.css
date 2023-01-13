@@ -183,6 +183,7 @@
     color: aliceblue;
     font-size: 0.8em;
     text-decoration: none;
+    cursor: pointer;
   }
 
   .Instructions {

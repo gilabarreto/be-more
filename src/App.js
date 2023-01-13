@@ -46,11 +46,9 @@ function App() {
     </>)
   }
 
-  // Function text-to-speech
-  const { speak } = useSpeechSynthesis();
-
   // Function to Handle Input Submit
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (isDisabled) {
       return;
     }
@@ -58,7 +56,6 @@ function App() {
     setIsDisabled(true)
     setDelayedString("loading");
 
-    event.preventDefault();
     const UserRequest = event.target.UserRequest.value;
 
     fetchData(UserRequest);
@@ -92,43 +89,43 @@ function App() {
   // Function to Handle Text-to-speech
   const handleVoiceOver = (msg) => {
 
-    if (isDisabled || redButton === true) {
+    if (isDisabled || redButton === true || delayedString !== screenMsg) {
       return;
     }
     const handleComplete = () => {
       setIsDisabled(false);
-    }   
+    }
 
     setRedButton(false);
     setIsDisabled(true)
-    
+
     const utterance = new SpeechSynthesisUtterance(msg);
     utterance.onend = handleComplete;
     speechSynthesis.speak(utterance);
-
   }
 
   // Function to Print Message as Typewriter
   const delayString = (string) => {
 
-    setIsDisabled(true)
     setDelayedString("");
 
     for (let x = 0; x < string.length; x++) {
       setTimeout(() => {
         setDelayedString(prevString => prevString + string[x]);
       }, x * 100)
+      setTimeout(() => { setIsDisabled(false) }, string.length * 100);
     }
-    setTimeout(() => { setIsDisabled(false) }, string.length * 100);
   }
 
   useEffect(() => {
     if (screenMsg === "") {
+      setIsDisabled(true)
       setScreenMsg(welcome)
     }
-    setIsDisabled(true)
+    setIsDisabled(true);
     delayString(screenMsg);
   }, [screenMsg]);
+
 
   return (
     <>
