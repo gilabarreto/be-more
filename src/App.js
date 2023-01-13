@@ -60,7 +60,9 @@ function App() {
 
   // Function to Handle Button Clicks
   const handleClick = (request) => {
-
+    if (isDisabled) {
+      return;
+    }
     setRedButton(false)
     setIsDisabled(true)
     setDelayedString("loading");
@@ -68,13 +70,15 @@ function App() {
     fetchData(request)
   }
 
+  // Function to Handle Static Msgs
   const handleStaticMsg = (msg) => {
-    if (setRedButton) {
-      setRedButton(false)
-      setDelayedString("loading");
-      setDelayedString(clearConsole)
+
+    if (isDisabled) {
+      return;
+    } else if (redButton === true) {
+      setRedButton(false);
     }
-    setDelayedString(msg)
+    setDelayedString(msg);
   }
 
   // Function to Print Message as Typewriter
@@ -93,8 +97,8 @@ function App() {
 
   useEffect(() => {
     if (screenMsg === "") {
-      setIsDisabled(true)
       setScreenMsg(welcome)
+      setIsDisabled(true)
     }
     delayString(screenMsg);
   }, [screenMsg]);
@@ -124,21 +128,21 @@ function App() {
           <form onSubmit={handleSubmit}>
             <input type="text" id="UserRequest" className="Rectangle" name="UserRequest" />
           </form>
-          <span id="Voice" className="Circle-Top" onClick={() => { if (isDisabled) return; speak({ text: screenMsg }) }} title="Click to Hear"></span>
+          <span id="Voice" className="Circle-Top" onClick={() => { if (isDisabled || redButton === true) return; speak({ text: screenMsg }) }} title="Click to Hear"></span>
         </div>
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
             <span className="Plus-Sign">+</span>
           </div>
           <div className='Controls-Middle-Right'>
-            <span id="Btn-Random" className="Triangle" onClick={() => { if (isDisabled) return; handleClick(adviceResquest) }} title="Generate a Good Advice">▲</span>
-            <span id="Btn-Quote" className="Circle-Middle" onClick={() => { if (isDisabled) return; handleClick(quoteResquest) }} title="Generate a Motivational Quote"></span>
+            <span id="Btn-Random" className="Triangle" onClick={() => handleClick(adviceResquest)} title="Generate a Good Advice">▲</span>
+            <span id="Btn-Quote" className="Circle-Middle" onClick={() => handleClick(quoteResquest)} title="Generate a Motivational Quote"></span>
           </div>
         </div>
         <div className='Controls-Bottom'>
           <div className='Controls-Bottom-Left'>
-            <span id="Btn-Clear-Console" className="Clear-Console" onClick={() => { if (isDisabled) return; handleStaticMsg(clearConsole) }} title="Clear Console">Clear</span>
-            <span id="Btn-Instructions" className="Instructions" onClick={() => { if (isDisabled) return; handleStaticMsg(instructions) }} title="Click for More Instructions">Info</span>
+            <span id="Btn-Clear-Console" className="Clear-Console" onClick={() => { handleStaticMsg(clearConsole) }} title="Clear Console">Clear</span>
+            <span id="Btn-Instructions" className="Instructions" onClick={() => { handleStaticMsg(instructions) }} title="Click for More Instructions">Info</span>
           </div>
           <div className='Controls-Bottom-Right'>
             <span id="Btn-Youtube" className="Circle-Bottom" onClick={() => { if (isDisabled) return; setRedButton(true) }} title="Don Not Press This Button!"></span>
