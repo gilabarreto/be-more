@@ -52,14 +52,23 @@ function App() {
 
   // Function to Handle Input Submit
   const handleSubmit = (event) => {
+    if (isDisabled) {
+      return;
+    }
+    setRedButton(false)
+    setIsDisabled(true)
+    setDelayedString("loading");
+
     event.preventDefault();
     const UserRequest = event.target.UserRequest.value;
+
     fetchData(UserRequest);
     event.target.UserRequest.value = '';
   }
 
   // Function to Handle Button Clicks
   const handleClick = (request) => {
+    
     if (isDisabled) {
       return;
     }
@@ -79,6 +88,18 @@ function App() {
       setRedButton(false);
     }
     setDelayedString(msg);
+  }
+
+  // Function to Handle Static Msgs
+  const handleVoiceOver = () => {
+
+    if (isDisabled || redButton === true) {
+      return;
+    }
+    setRedButton(false);
+    setIsDisabled(true)
+    
+    speak({ text: screenMsg })
   }
 
   // Function to Print Message as Typewriter
@@ -128,7 +149,7 @@ function App() {
           <form onSubmit={handleSubmit}>
             <input type="text" id="UserRequest" className="Rectangle" name="UserRequest" />
           </form>
-          <span id="Voice" className="Circle-Top" onClick={() => { if (isDisabled || redButton === true) return; speak({ text: screenMsg }) }} title="Click to Hear"></span>
+          <span id="Voice" className="Circle-Top" onClick={() => handleVoiceOver() } title="Click to Hear"></span>
         </div>
         <div className='Controls-Middle'>
           <div className='Controls-Middle-Left'>
