@@ -1,71 +1,32 @@
-# Getting Started with Create React App
+# Be-More
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The idea for Be-More originally started out as a Quote Generator, but evolved as everything does. Aside from quotes and advice, ChatGPT's API can be used to ask questions about various topics. I also wanted it to look friendly, so I drew inspiration from the BMO character from the Adventure Time cartoon, from which I derived the name for the application. 
 
-## Available Scripts
+The front-end was built with React, the back-end was built with ExpressJS, and the console was tailored with CSS.
 
-In the project directory, you can run:
+# Final Product
 
-### `npm start`
+Running App
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![running-app](https://user-images.githubusercontent.com/97627481/211741103-181d5ed3-7800-440b-b9c3-4f606b117298.gif)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Screenshot
 
-### `npm test`
+![Be-More - Google Chrome 1_10_2023 11_58_55 PM](https://user-images.githubusercontent.com/97627481/211741212-170dad16-ff04-4705-89d2-23d5485c5ce1.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+Install dependencies with `npm install` and run the server with `npm start`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## API Server and Database Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For full functionality fork and clone be-more-server [here](https://github.com/gilabarreto/be-more-server).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Dependencies
 
-### `npm run eject`
+- Front-End: React, Axios and OpenAi
+- Back-End: ExpressJS and Axios
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Enjoy!
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# be-more
+![""](https://i.giphy.com/media/pO4UHglOY2vII/giphy.webp)
