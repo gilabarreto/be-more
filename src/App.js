@@ -18,7 +18,12 @@ function App() {
 
     try {
       const response = await axios.post('https://be-more-server.onrender.com/chat',
-        { data: request }
+        { data: request },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
 
       setScreenMsg(response.data)
