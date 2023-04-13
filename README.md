@@ -1,4 +1,4 @@
-# Be-More
+# Be-More - [https://gilabarreto.github.io/be-more/](https://gilabarreto.github.io/be-more/)
 
 The idea for Be-More originally started out as a Quote Generator, but evolved as everything does. Aside from quotes and advice, ChatGPT's API can be used to ask questions about various topics. I also wanted it to look friendly, so I drew inspiration from the BMO character from the Adventure Time cartoon, from which I derived the name for the application. 
 
