@@ -13,20 +13,20 @@ function App() {
   const [delayedString, setDelayedString] = useState("");
   const [redButton, setRedButton] = useState(false);
 
+  const API_URL =
+    process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   // Async Function to Make Axios Post Request
   async function fetchData(request) {
 
     try {
-      const response = await axios.post('https://be-more-server.onrender.com/chat',
+      const response = await axios.post(
+        `${API_URL}/chat`,
         { data: request },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        { headers: { 'Content-Type': 'application/json' } }
       );
 
-      setScreenMsg(response.data)
+      setScreenMsg(String(response.data))
 
     } catch (err) {
       console.log(err)
