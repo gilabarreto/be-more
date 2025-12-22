@@ -35,8 +35,8 @@ function App() {
 
   // Messages
   const welcome = "Hi, I'm Be-More! I'm here to help you be a better you. Click the Info button for more instructions."
-  const adviceResquest = "Give me a random advice to cheer my day. Don't repeat previous answers."
-  const quoteResquest = "Provide me a random quote. Don't repeat previous answers."
+  const adviceResquest = "Give a single piece of advice to brighten the day. Keep it under 200 characters. Do not add introductions or extra text."
+  const quoteResquest = "Provide a single inspirational quote in the format: \"quote\" (Author). Do not add explanations. Keep it concise."
   const clearConsole = "Clean and Clear. What's next? :-)"
 
   const instructions = () => {
