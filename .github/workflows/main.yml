@@ -1,23 +1,33 @@
+name: Build and Deploy
+
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Build
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install and Build
         run: |
           npm install
-          npm run build        
+          npm run build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          TOKEN: ${{ secrets.GH_GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build
+          branch: gh-pages
+          folder: build
